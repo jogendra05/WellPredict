@@ -129,7 +129,7 @@ with st.sidebar:
 
 # Handle selected option
 
-elif selected == 'Report Uploader':
+if selected == 'Report Uploader':
     report_ocr_app.report_uploader()
 
 elif selected == 'Diabetes Prediction':
@@ -150,4 +150,5 @@ elif selected == 'Kidney Disease Prediction':
 
 elif selected == 'Chat Bot':
     chatbot.chat_bot()
+
 

@@ -92,6 +92,68 @@
 #     elif selected == 'Chat Bot':
 #         chatbot.chat_bot()
 
+
+
+# import streamlit as st
+# import pickle
+# import os
+# from streamlit_option_menu import option_menu
+
+# # Import other files
+# from disease_main import kidney_main, heart_main, diabetes_main, Diabetes_general, Heart_general, Kidney_general, Doctor_general
+# from Profile import user_profile
+# from chatbot_folder.streamlit_chatbot_interface_main import chatbot
+# from report_ocr_folder import report_ocr_app
+
+# # App configuration
+# st.set_page_config(page_title="Multiple Disease Prediction", layout="wide", page_icon="")
+# working_dir = os.path.dirname(os.path.abspath(__file__))
+
+# # Load model(s)
+# # (kept in case other modules expect the model to be loaded here)
+# diabetes_model = pickle.load(open(f'{working_dir}/saved_models/diabetes.pkl', 'rb'))
+
+# # --- Main application (login removed) ---
+# st.title("Welcome to WellPredict!!")
+# st.write("Use the sidebar to navigate between features.")
+
+# with st.sidebar:
+#     selected = option_menu("Multiple Disease Prediction", 
+#                             ['Report Uploader',
+#                              'Diabetes Prediction',
+#                              'Heart Disease Prediction',
+#                              'Kidney Disease Prediction',
+#                              'Chat Bot'
+#                             ],
+#                             menu_icon='hospital-fill',
+#                             icons=['report', 'activity', 'heart', 'person', 'person'],
+#                             default_index=0)
+
+# # Handle selected option
+
+# if selected == 'Report Uploader':
+#     report_ocr_app.report_uploader()
+
+# elif selected == 'Diabetes Prediction':
+#     Diabetes_general.diabetes_general()
+#     with st.expander('Additional Info'):
+#         diabetes_main.diabetes()
+
+# elif selected == 'Heart Disease Prediction':
+#     Heart_general.heart_gen()
+#     with st.expander('Additional Info'):
+#         heart_main.heart()
+
+# elif selected == 'Kidney Disease Prediction':
+#     Kidney_general.kidney_gen()
+#     with st.expander('Additional Info'):
+#         kidney_main.kidney()
+
+
+# elif selected == 'Chat Bot':
+#     chatbot.chat_bot()
+
+
 import streamlit as st
 import pickle
 import os
@@ -115,6 +177,7 @@ diabetes_model = pickle.load(open(f'{working_dir}/saved_models/diabetes.pkl', 'r
 st.title("Welcome to WellPredict!!")
 st.write("Use the sidebar to navigate between features.")
 
+# Sidebar navigation
 with st.sidebar:
     selected = option_menu("Multiple Disease Prediction", 
                             ['Report Uploader',
@@ -126,9 +189,17 @@ with st.sidebar:
                             menu_icon='hospital-fill',
                             icons=['report', 'activity', 'heart', 'person', 'person'],
                             default_index=0)
+    
+    # Divider line
+    st.markdown("---")
+    
+    # Back button (redirects to external URL)
+    if st.button("Back to Home"):
+        st.markdown("""
+            <meta http-equiv="refresh" content="0; url='https://well-predict-fyp.vercel.app'" />
+        """, unsafe_allow_html=True)
 
 # Handle selected option
-
 if selected == 'Report Uploader':
     report_ocr_app.report_uploader()
 
@@ -146,7 +217,6 @@ elif selected == 'Kidney Disease Prediction':
     Kidney_general.kidney_gen()
     with st.expander('Additional Info'):
         kidney_main.kidney()
-
 
 elif selected == 'Chat Bot':
     chatbot.chat_bot()
